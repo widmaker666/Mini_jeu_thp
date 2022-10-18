@@ -24,6 +24,18 @@ class Player #on creer la classe Player pour savoir comment les joueurs vont se 
         puts "Il te reste maintenant #{@life_points} de vie après avoir pris #{damage} de dommage"
     end 
 
+    def attacks(player)#on créer une méthode attack pour créer des dégats aléatoirs et que un player1 tape sur player2.
+        
+        puts "Le joueur 1 \"#{@name}\" mets un coup d'épée à \"#{player.name}\" !" #JE NE COMPREND PAS DU TOUT LE .NAME .... ça doit vouloir dire on applique le nom créé lorsqu'on créer un nouveau joueur
+        damage = compute_damage #on va créer un variable pour mettre la méthode compute_damage (qui jette un dès au hasard entre 1 et 6) et qu'on pourra rappeler pour l'appliquer à la méthode get_damage
+        puts "le joueur 2 \"#{player.name}\" vient de prendre #{damage} points de dommage!" #JE COMPREND PAS POURQUOI LE .NAME TOUJOURS ! COURS DE MERDE
+        damage = get_damage(damage) #On vient rappeler la variable damage qui fait référence au "dé lancé" et on lui fait = à get_damage pour qu'on puisse lui appliquer tout ce que se passe à l'intérieur de get_damage.    
+    end
+
+    def compute_damage #création d'une méthode pour lancer un dé aléatoirement
+        return rand(1..6) #Pourquoi un return ... bonne question ... au lieu d'explquer dans le cours on fait un copier coller dixit le cours ! SUPER METHODE D'APPRENTISSAGE !
+    end
+
 
 end
 binding.pry
