@@ -19,6 +19,10 @@ class Player #on creer la classe Player pour savoir comment les joueurs vont se 
         end  
     end
 
+    def compute_damage #création d'une méthode pour lancer un dé aléatoirement
+        return rand(1..6) #Pourquoi un return ... bonne question ... au lieu d'explquer dans le cours on fait un copier coller dixit le cours ! SUPER METHODE D'APPRENTISSAGE !
+    end
+
     def get_damage(damage) #création de la méthode qui permet de faire baisser les points de vie
         @life_points -= damage #on va faire le calcul donc @life_points et égale à @life_points moins damage (variable créée pour la méthode) le -= permet d'éviter la répétition de @life_points = @life_points - damage
         puts "Il te reste maintenant #{@life_points} de vie après avoir pris #{damage} de dommage"
@@ -29,13 +33,12 @@ class Player #on creer la classe Player pour savoir comment les joueurs vont se 
         puts "Le joueur 2 \"#{@name}\" mets un coup d'épée à \"#{player.name}\" !" #JE NE COMPREND PAS DU TOUT LE .NAME .... ça doit vouloir dire on applique le nom créé lorsqu'on créer un nouveau joueur
         damage = compute_damage #on va créer un variable pour mettre la méthode compute_damage (qui jette un dès au hasard entre 1 et 6) et qu'on pourra rappeler pour l'appliquer à la méthode get_damage
         puts "le joueur 1 \"#{player.name}\" vient de prendre #{damage} points de dommage!" #JE COMPREND PAS POURQUOI LE .NAME TOUJOURS ! COURS DE MERDE
-        damage = get_damage(damage) #On vient rappeler la variable damage qui fait référence au "dé lancé" et on lui fait = à get_damage pour qu'on puisse lui appliquer tout ce que se passe à l'intérieur de get_damage.    
+        player.get_damage(damage)
+        player.show_state
+        #on applique les méthode get_damage et show_state à la variable de attacks : player.get_damage (pour compter les dommages) et player.show_state (pour vérifier où on en est des PV)
     end
 
-    def compute_damage #création d'une méthode pour lancer un dé aléatoirement
-        return rand(1..6) #Pourquoi un return ... bonne question ... au lieu d'explquer dans le cours on fait un copier coller dixit le cours ! SUPER METHODE D'APPRENTISSAGE !
-    end
 
 
 end
-binding.pry
+
