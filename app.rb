@@ -5,23 +5,20 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
-player1 = Player.new("Merde")
-player2 = Player.new("Clanpin")
+player1 = Player.new("BLADE")
+player2 = Player.new("SANGOKU")
 
-while player1.life_points > 0 && player2.life_points >0 do
-    puts "
-   -----------
-   "
-  
-   puts "Voici l'état des combattants :"
+
+while player1.life_points > 0 && player2.life_points > 0 do
+   puts "\n======================================\n" 
+   
+   puts "IL TE RESTE COMBIEN DE VIE ?"
    player1.show_state
    player2.show_state
   
-   puts "
-   ---
-   "
+   puts "\n<<<<<<<<<<<<<<PREPARE TO FIGHT>>>>>>>>>>>>>>>>>\n"
   
-   puts "Luttez ou mourrez :"
+   puts "\n***********FIGHT************\n"
   
    player1.attacks(player2) # player 1 attaque
    if player2.life_points <= 0 # pas de mort-vivants
@@ -31,4 +28,4 @@ while player1.life_points > 0 && player2.life_points >0 do
   
   end
 
-binding.pry
+
