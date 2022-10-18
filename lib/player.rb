@@ -9,13 +9,12 @@ class Player #on creer la classe Player pour savoir comment les joueurs vont se 
     end 
 
     def show_state #Catégorie qui permet de savoir où en est le personnage
-        puts "#{@name}, il te reste que #{@life_points} points de vie" #pour ça on appel avec un #{} les @ créés avant
-            
+                  
         if @life_points <= 0 #ici on va essayer de dire si la vie et inférieur ou égale 0 tu meurs !
             puts "#{@name}, il te reste #{@life_points} points de vie ! T'ES MORT"
             
         else @life_points > 0 #voici la ligne qui dit "si la vie qu'il te reste et supérieur à 0 t'es toujours en jeu mais fait gaffe"
-            puts "Esquive, avant de mourir ! tu n'a plus que #{@life_points} points de vie"  
+            puts "tu n'a plus que #{@life_points} points de vie"  
         end  
     end
 
@@ -30,15 +29,68 @@ class Player #on creer la classe Player pour savoir comment les joueurs vont se 
 
     def attacks(player)#on créer une méthode attack pour créer des dégats aléatoirs et que un player1 tape sur player2.
         
-        puts "Le joueur 2 \"#{@name}\" mets un coup d'épée à \"#{player.name}\" !" #JE NE COMPREND PAS DU TOUT LE .NAME .... ça doit vouloir dire on applique le nom créé lorsqu'on créer un nouveau joueur
+        puts "Le joueur 1 \"#{@name}\" mets un coup d'épée à \"#{player.name}\" !" #JE NE COMPREND PAS DU TOUT LE .NAME .... ça doit vouloir dire on applique le nom créé lorsqu'on créer un nouveau joueur
         damage = compute_damage #on va créer un variable pour mettre la méthode compute_damage (qui jette un dès au hasard entre 1 et 6) et qu'on pourra rappeler pour l'appliquer à la méthode get_damage
-        puts "le joueur 1 \"#{player.name}\" vient de prendre #{damage} points de dommage!" #JE COMPREND PAS POURQUOI LE .NAME TOUJOURS ! COURS DE MERDE
+        puts "le joueur 2 \"#{player.name}\" vient de prendre #{damage} points de dommage!" #JE COMPREND PAS POURQUOI LE .NAME TOUJOURS ! COURS DE MERDE
         player.get_damage(damage)
         player.show_state
         #on applique les méthode get_damage et show_state à la variable de attacks : player.get_damage (pour compter les dommages) et player.show_state (pour vérifier où on en est des PV)
     end
-
-
-
 end
+
+class HumanPlayer < Player
+    attr_accessor :weapon_level, :name
+
+    def initialize (human_name)
+        @name = human_name   
+        @life_points = 100
+        @weapon_level = 1
+    end
+    
+    def show_state 
+    puts "#{@name}, il te reste #{@life_points} points de vie et ton arme est au level #{@weapon_level} ! "
+    end
+
+    def compute_damage
+        rand(1..6) * @weapon_level
+    end
+   
+    def search_weapon
+        new_weapon = rand(1..6)
+
+       if new_weapon == 1
+        puts "LVL de l'arme trouvé est #{new_weapon}, ça ne sert à rien de t'encombrer !"
+       elsif new_weapon == 2 || new_weapon == 3 || new_weapon == 4
+        puts "Tu viens de trouver une arme de LVL: #{new_weapon}"
+        puts "récupère là et ajoute là tout de suite à ton équipement"
+        @weapon_level = new_weapon  
+       else new_weapon <= 5
+        puts "Arme légendaire de niveau #{new_weapon} ! NE LA PERD PAS" 
+        @weapon_level = new_weapon     
+       end
+    end
+
+    def health_pack
+        pack_life = rand(1..6)
+
+        if pack_life == 1
+            puts "désoler pour toi mais y'a pas de vie ici..."
+        elsif pack_life >= 2 && pack_life <= 5
+            puts "+50 PV... Remet toi de tes blessures"
+            @life_points += 50
+            
+        else pack_life == 6 
+            puts "+80 PV... Woow BONUS LIFE"
+            @life_points += 80     
+        end
+        @life_points = 100 if @life_points > 100
+    end
+end
+
+
+
+        
+    
+
+
 
